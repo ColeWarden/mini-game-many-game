@@ -1,0 +1,35 @@
+[gd_scene format=2]
+
+[node name="ReadMe" type="Label"]
+text = "Hello Game Dev crew!
+Welcome to the mini-game many-game-project.
+
+If you have any questions, you can reach me via my discord, Woon#4652.
+
+Getting started:
+-Create a folder under the \"res://\" in the FileSystem dock.
+-Name the folder after your first name, all lowercase.
+-We are going off an honor system, so please keep to your own folder 
+-Ask before duplicating other's code.
+
+Mine-game:
+-Project can 2D, 3D, platformer, top-down, anything you want.
+-It's recommended to make the game as small as possible and increment from there.
+-Always estimate it will take more time than less time to make a feature.
+
+Final note:
+-I'd highly recommend using the github plugin in the AssetLib in the top middle of the screen (next to 2D, 3D and Script), and set up a github account.
+-When starting a new feature:
++ \"pull\" the repo to your local project.
++ Create a \"branch\" on the repo, name it \"your_first_name - feature_name\" or something similar.
++ Set your project onto that branch and work from there.
++ \"push\" on the branch when needed.
++ Once done, merge your branch back to the main on and repeat from the top.
+
+-This may change in the future, look for unofficial meetings (Tues 8:00pm, Fri 2:00pm)
+
+	
+	
+	
+
+	"
