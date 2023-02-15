@@ -1,4 +1,5 @@
 extends Light2D
+class_name LightTile
 
 export(Texture) var transparent_texture: Texture
 export(Texture) var semi_transparent_texture: Texture
@@ -21,4 +22,10 @@ func _ready() -> void:
 func set_world_position(pos: Vector2)-> void:
 	var tile_pos: Vector2 = global_position / 32.0
 	tile_pos = Vector2(floor(tile_pos.x), floor(tile_pos.y))
+	set_tile_position(tile_pos)
+
+func set_tile_position(tile_pos: Vector2)-> void:
 	global_position = (tile_pos * 32.0) + Vector2(16,16)
+
+func get_tile_position()-> Vector2:
+	return (global_position - Vector2(16,16)) / 32.0
