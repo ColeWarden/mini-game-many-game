@@ -1,4 +1,6 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Gavin/image.png" type="Texture" id=1]
 
 [node name="ReadMe" type="Label"]
 text = "Hello Game Dev crew!
@@ -33,3 +35,8 @@ Final note:
 	
 
 	"
+
+[node name="Image" type="Sprite" parent="."]
+position = Vector2( 749, 111 )
+scale = Vector2( 0.381677, 0.182805 )
+texture = ExtResource( 1 )
