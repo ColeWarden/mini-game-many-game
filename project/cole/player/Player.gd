@@ -8,3 +8,5 @@ func _input(event: InputEvent) -> void:
 
 # HERE
 # Stuff
+
+# Version 6!
