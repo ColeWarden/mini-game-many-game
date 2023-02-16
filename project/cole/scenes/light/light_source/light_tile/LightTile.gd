@@ -13,7 +13,7 @@ func set_light_mode(_mode: int)-> void:
 	light_mode = _mode
 	if (light_mode == LIGHT_MODE.TRANSPARENT):
 		set_texture(transparent_texture)
-	elif (light_mode == LIGHT_MODE.TRANSPARENT):
+	elif (light_mode == LIGHT_MODE.SEMI_TRANSPARENT):
 		set_texture(semi_transparent_texture)
 
 func _ready() -> void:

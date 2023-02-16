@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://cole/scenes/UnitLogger.gd" type="Script" id=1]
+[ext_resource path="res://cole/scenes/unit/player/Player.tscn" type="PackedScene" id=2]
+
+[node name="UnitLogger" type="Node2D" groups=["unitLogger"]]
+script = ExtResource( 1 )
+packedPlayer = ExtResource( 2 )
