@@ -16,8 +16,8 @@ func set_light_mode(_mode: int)-> void:
 	elif (light_mode == LIGHT_MODE.SEMI_TRANSPARENT):
 		set_texture(semi_transparent_texture)
 
-func _ready() -> void:
-	pass # Replace with function body.
+func set_light_color(_color: Color)-> void:
+	color = _color
 
 func set_world_position(pos: Vector2)-> void:
 	var tile_pos: Vector2 = pos / 32.0

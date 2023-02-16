@@ -2,10 +2,13 @@ extends Node2D
 class_name UnitLogger
 
 export(PackedScene) var packedPlayer: PackedScene 
-
+export(PackedScene) var packedDummy: PackedScene 
+onready var turn: int = 0
+onready var turn_order: int = -1
 onready var units: Array = []
 onready var packedUnits: Dictionary = {
 	"player": packedPlayer,
+	"dummy": packedDummy,
 }
 
 func _ready() -> void:
@@ -13,6 +16,19 @@ func _ready() -> void:
 
 func load_units()-> void:
 	var _unit = create_unit_at_pos("player", Vector2(5,5))
+	_unit = create_unit_at_pos("dummy", Vector2(6,5))
+	next_turn_order()
+
+func next_turn_order()-> void:
+	var unit_count: int = units.size()
+	if unit_count == 0:
+		return
+	turn_order = (turn_order + 1) % unit_count
+	play_unit_turn(turn_order)
+
+func play_unit_turn(_turn_order: int)-> void:
+	units[_turn_order].play_turn()
+
 
 func create_unit_at_pos(unit_name: String, tile_pos: Vector2)-> Node2D:
 	var unit: Node2D = create_unit(unit_name)
@@ -51,6 +67,7 @@ func get_unit_at_tile_pos(tile_pos: Vector2)-> Node2D:
 
 func is_unit_at_tile_pos(tile_pos: Vector2)-> bool:
 	return (get_unit_at_tile_pos(tile_pos) != null)
+
 
 #var c = 0
 #func _process(delta: float) -> void:

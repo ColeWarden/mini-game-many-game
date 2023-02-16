@@ -1,11 +1,13 @@
 extends Unit
 
 onready var flashlight: FlashLight = $Flashlight
+onready var gui: CanvasLayer = $Gui
 
 func _ready() -> void:
 	._ready()
 	var _err = connect("move_to_tile", flashlight, "set_tile_position")
 	_err = connect("look_to_direction", flashlight, "set_look_direction")
+	flashlight.set_tile_size(3)
 
 
 func _process(delta: float) -> void:

@@ -14,7 +14,7 @@ func update_lights()-> void:
 		return 
 	clear_lights()
 	
-	var surrounding_tiles: PoolVector2Array = get_tiles_cone(tile_position, look_direction, tile_size)
+	var surrounding_tiles: PoolVector2Array = get_tiles_cone_occluded(tile_position, look_direction, tile_size)
 	var lightTile: LightTile
 	for t_pos in surrounding_tiles:
 		lightTile = create_light(t_pos)
@@ -25,4 +25,11 @@ func update_lights()-> void:
 	for t_pos in edge_tiles:
 		lightTile = create_light(t_pos)
 		lightTile.set_light_mode(lightTile.LIGHT_MODE.SEMI_TRANSPARENT)
-
+	
+	var perpendicular_vec: Vector2 = get_perpendicular_cardinal_dir(look_direction)
+	var size: Vector2 = Vector2(abs(perpendicular_vec.x), abs(perpendicular_vec.y))
+	surrounding_tiles = get_tiles_around_sqr(tile_position - look_direction, size)
+	for t_pos in surrounding_tiles:
+		lightTile = create_light(t_pos)
+		lightTile.set_light_mode(lightTile.LIGHT_MODE.SEMI_TRANSPARENT)
+	
