@@ -7,12 +7,13 @@ class_name LightArea
 #	CONE,
 #}
 
-var tile_size: int = 2 setget set_tile_size
+var tile_size: int = 1 setget set_tile_size
 #var mode: int = AREA_MODE.SQAURE
 
 # Serves as (rect_size), (radius) and (cone_length) for inherited light classes
 func set_tile_size(size: int)-> void:
 	tile_size = size
+	update_lights()
 
 # Returns rectangle of tiles at (tile_pos) of size (rect_size)
 func get_tiles_around_sqr(tile_pos: Vector2, rect_size: Vector2)-> PoolVector2Array:
@@ -36,9 +37,9 @@ func get_tiles_around_sqr(tile_pos: Vector2, rect_size: Vector2)-> PoolVector2Ar
 func get_tiles_around_cir(tile_pos: Vector2, radius: int)-> PoolVector2Array:
 	var tiles_cir: PoolVector2Array = []
 	var tiles_sqr: PoolVector2Array = get_tiles_around_sqr(tile_pos, Vector2(radius, radius))
-	for tile_pos in tiles_sqr:
-		if tile_pos.length() <= radius:
-			tiles_cir.append(tile_pos)
+	for sqr_pos in tiles_sqr:
+		if tile_pos.distance_to(sqr_pos) <= radius:
+			tiles_cir.append(sqr_pos)
 	return tiles_cir
 
 # Returns 90 degree cone of tiles at (tile_pos) given (cardinal direction) of length (cone_length)

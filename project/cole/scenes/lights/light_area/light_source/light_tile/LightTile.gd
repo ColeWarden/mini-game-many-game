@@ -20,7 +20,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func set_world_position(pos: Vector2)-> void:
-	var tile_pos: Vector2 = global_position / 32.0
+	var tile_pos: Vector2 = pos / 32.0
 	tile_pos = Vector2(floor(tile_pos.x), floor(tile_pos.y))
 	set_tile_position(tile_pos)
 

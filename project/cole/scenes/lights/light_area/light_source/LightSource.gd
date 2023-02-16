@@ -45,10 +45,5 @@ func _get_light_at_tile(tile_pos: Vector2)-> LightTile:
 func _add_light(light: LightTile)-> void:
 	lights.append(light)
 
-func _add_lights(lights: Array)-> void:
-	for light in lights:
-		_add_light(light)
-
-
 
 

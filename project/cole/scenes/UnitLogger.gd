@@ -12,7 +12,7 @@ func _ready() -> void:
 	load_units()
 
 func load_units()-> void:
-	create_unit_at_pos("player", Vector2(5,5))
+	var _unit = create_unit_at_pos("player", Vector2(5,5))
 
 func create_unit_at_pos(unit_name: String, tile_pos: Vector2)-> Node2D:
 	var unit: Node2D = create_unit(unit_name)
@@ -52,10 +52,10 @@ func get_unit_at_tile_pos(tile_pos: Vector2)-> Node2D:
 func is_unit_at_tile_pos(tile_pos: Vector2)-> bool:
 	return (get_unit_at_tile_pos(tile_pos) != null)
 
-var c = 0
-func _process(delta: float) -> void:
-	c += 1
-	if (c % 60 == 0):
-		pass
-		#print(get_all_unit_positions())
-		#print(is_unit_at_tile_pos(Vector2(3,4)))
+#var c = 0
+#func _process(delta: float) -> void:
+#	c += 1
+#	if (c % 60 == 0):
+#		pass
+#		#print(get_all_unit_positions())
+#		#print(is_unit_at_tile_pos(Vector2(3,4)))

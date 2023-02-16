@@ -30,9 +30,9 @@ func _has_light(tile_pos: Vector2, light: LightTile)-> bool:
 
 func _clean_position(tile_pos: Vector2)-> void:
 	if light_tiles[tile_pos.x][tile_pos.y].empty():
-		light_tiles[tile_pos.x].erase(tile_pos.y)
+		var _err = light_tiles[tile_pos.x].erase(tile_pos.y)
 		if light_tiles[tile_pos.x].empty():
-			light_tiles.erase(tile_pos.x)
+			_err = light_tiles.erase(tile_pos.x)
 
 func _create_light(tile_pos: Vector2, light: LightTile)-> void:
 	_create_position(tile_pos)

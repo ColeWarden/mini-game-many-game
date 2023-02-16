@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://cole/scenes/LightTileController.gd"
 }, {
 "base": "Node2D",
+"class": "LightLogger",
+"language": "GDScript",
+"path": "res://cole/scenes/LightLogger.gd"
+}, {
+"base": "Node2D",
 "class": "LightSource",
 "language": "GDScript",
 "path": "res://cole/scenes/lights/light_area/light_source/LightSource.gd"
@@ -48,6 +53,7 @@ _global_script_class_icons={
 "FlashLight": "",
 "LightArea": "",
 "LightController": "",
+"LightLogger": "",
 "LightSource": "",
 "LightTile": "",
 "Unit": "",
@@ -59,6 +65,10 @@ _global_script_class_icons={
 config/name="mini-game-many-game"
 run/main_scene="res://_core/ReadMe.tscn"
 config/icon="res://core/icon.png"
+
+[debug]
+
+settings/fps/force_fps=60
 
 [importer_defaults]
 
