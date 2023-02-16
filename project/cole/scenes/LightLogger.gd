@@ -9,11 +9,12 @@ onready var packedLights: Dictionary = {
 }
 
 func _ready() -> void:
+	pass
 	load_lights()
 
 func load_lights()-> void:
 	var candle = create_light_at_pos("candle", Vector2(8,5))
-	candle.set_tile_size(4)
+	candle.set_tile_size(2)
 
 func create_light_at_pos(light_name: String, tile_pos: Vector2)-> Node2D:
 	var light: Node2D = create_light(light_name)

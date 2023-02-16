@@ -1,11 +1,25 @@
 extends Unit
 
 onready var flashlight: FlashLight = $Flashlight
+onready var gui: PlayerGui = $Gui
+#var freeplay: bool = false
 
 func _ready() -> void:
 	._ready()
 	var _err = connect("move_to_tile", flashlight, "set_tile_position")
 	_err = connect("look_to_direction", flashlight, "set_look_direction")
+	_err = connect("moves_left", self, "_update_gui_moves")
+	flashlight.set_tile_size(3)
+	set_starting_moves(3)
+
+func _out_of_moves()-> void:
+	_update_gui_waiting()
+
+func _update_gui_waiting()-> void:
+	gui.set_state_waiting()
+
+func _update_gui_moves(_moves_left: int)-> void:
+	gui.set_state_moves(_moves_left)
 
 
 func _process(delta: float) -> void:

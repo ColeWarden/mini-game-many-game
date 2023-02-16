@@ -1,14 +1,12 @@
 extends LightSource
 class_name LightArea
 
-#enum AREA_MODE {
-#	SQAURE,
-#	CIRCLE,
-#	CONE,
-#}
 
+onready var tileMapEffect: TileMapEffect = get_tree().get_nodes_in_group("tileMapEffect").front()
+
+var tile_blocked: bool = true
 var tile_size: int = 1 setget set_tile_size
-#var mode: int = AREA_MODE.SQAURE
+
 
 # Serves as (rect_size), (radius) and (cone_length) for inherited light classes
 func set_tile_size(size: int)-> void:
@@ -30,7 +28,7 @@ func get_tiles_around_sqr(tile_pos: Vector2, rect_size: Vector2)-> PoolVector2Ar
 	var tiles: PoolVector2Array = []
 	for x in range(begin_tile.x, end_tile.x+1):
 		for y in range(begin_tile.y, end_tile.y+1):
-			tiles.append(Vector2(x,y)) 
+			tiles.append(Vector2(x,y))
 	return tiles
 
 #  Returns circle of tiles at (tile_pos) of radius (radius)
@@ -43,10 +41,57 @@ func get_tiles_around_cir(tile_pos: Vector2, radius: int)-> PoolVector2Array:
 	return tiles_cir
 
 # Returns 90 degree cone of tiles at (tile_pos) given (cardinal direction) of length (cone_length)
+func get_tiles_cone_occluded(tile_pos: Vector2, cardinal_dir: Vector2, cone_length: int)-> PoolVector2Array:
+	var tiles: PoolVector2Array = []
+	if !tileMapEffect.is_wall_tile(tile_pos):
+		tiles.append(tile_pos)
+	cone_length += 1
+	var next_tile: Vector2 = tile_pos
+	var max_left: int = cone_length
+	var max_right: int = cone_length
+	var left_dir: Vector2 = get_perpendicular_cardinal_dir(cardinal_dir)
+	var right_dir: Vector2 = left_dir * -1
+	
+	# Start diagonalling from tile_pos towards cardinal dir
+	var left_diagonal_dir: Vector2 = (left_dir + cardinal_dir)
+	var right_diagonal_dir: Vector2 = (right_dir + cardinal_dir)
+	var wall_forward: bool = false
+	for i in range(0, cone_length):
+		var center_tile_pos: Vector2 = (tile_pos + (cardinal_dir * i))
+		if wall_forward:
+			continue
+		elif tileMapEffect.is_wall_tile(center_tile_pos):
+			wall_forward = true
+			tiles.append(center_tile_pos)
+			continue
+		tiles.append(center_tile_pos)
+		for j in range(1, max_left+1):
+			if (i + j) >= cone_length:
+				break
+			next_tile = center_tile_pos + (left_diagonal_dir * j)
+			if tileMapEffect.is_wall_tile(next_tile):
+				max_left = j 
+				tiles.append(next_tile)
+				break
+			tiles.append(next_tile)
+		
+		for j in range(1, max_right+1):
+			if (i + j) >= cone_length:
+				break
+			next_tile = center_tile_pos + (right_diagonal_dir * j)
+			if tileMapEffect.is_wall_tile(next_tile):
+				max_right = j 
+				tiles.append(next_tile)
+				break
+			tiles.append(next_tile)
+			
+	return tiles
+
+
+# Returns 90 degree cone of tiles at (tile_pos) given (cardinal direction) of length (cone_length)
 func get_tiles_cone(tile_pos: Vector2, cardinal_dir: Vector2, cone_length: int)-> PoolVector2Array:
-	#var origin_position: Vector2 = (global_position / 32.0).snapped(Vector2.ONE)
-	#origin_pos = tile_pos * 32.0
-	var tiles: PoolVector2Array = [tile_pos]
+	var tiles: PoolVector2Array = []
+	var next_tile: Vector2 = tile_pos
 	var begin_tile: Vector2 = tile_pos
 	var width: int = 1
 	var side_vec_1: Vector2 = get_perpendicular_cardinal_dir(cardinal_dir)
@@ -59,6 +104,14 @@ func get_tiles_cone(tile_pos: Vector2, cardinal_dir: Vector2, cone_length: int)-
 			tiles.append(begin_tile + (side_vec_2 * j))
 		width += 1
 	return tiles
+
+
+func _get_wall_tiles(tiles: PoolVector2Array)-> PoolVector2Array:
+	var walls: PoolVector2Array = []
+	for pos in tiles:
+		if tileMapEffect.is_wall_tile(pos):
+			walls.append(pos)
+	return walls
 
 # Returns a random perpendicular (cardinal_dir) of another cardinal_dir.
 # Getting the "other" perpendicular vector can be achived by calling (-1 * result) of this function.
