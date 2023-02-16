@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://cole/scenes/light/light_source/light_tile/LightTile.gd" type="Script" id=1]
+[ext_resource path="res://cole/scenes/lights/light_area/light_source/light_tile/LightTile.gd" type="Script" id=1]
 [ext_resource path="res://cole/sprites/tile_semi.png" type="Texture" id=2]
 [ext_resource path="res://cole/sprites/tile.png" type="Texture" id=3]
 

@@ -9,30 +9,30 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "LightSource",
+"base": "LightArea",
 "class": "FlashLight",
 "language": "GDScript",
-"path": "res://cole/scenes/unit/player/Flashlight.gd"
+"path": "res://cole/scenes/lights/Flashlight.gd"
 }, {
 "base": "LightSource",
 "class": "LightArea",
 "language": "GDScript",
-"path": "res://cole/scenes/light/LightArea.gd"
+"path": "res://cole/scenes/lights/light_area/LightArea.gd"
 }, {
 "base": "TileMap",
 "class": "LightController",
 "language": "GDScript",
-"path": "res://cole/scenes/LightController.gd"
+"path": "res://cole/scenes/LightTileController.gd"
 }, {
 "base": "Node2D",
 "class": "LightSource",
 "language": "GDScript",
-"path": "res://cole/scenes/light/light_source/LightSource.gd"
+"path": "res://cole/scenes/lights/light_area/light_source/LightSource.gd"
 }, {
 "base": "Light2D",
 "class": "LightTile",
 "language": "GDScript",
-"path": "res://cole/scenes/light/light_source/light_tile/LightTile.gd"
+"path": "res://cole/scenes/lights/light_area/light_source/light_tile/LightTile.gd"
 }, {
 "base": "Node2D",
 "class": "Unit",
