@@ -24,6 +24,7 @@ var costs: Dictionary = {
 
 func _ready()-> void:
 	connect("out_of_moves", unitLogger, "next_turn_order")
+
 func play_turn()-> void:
 	set_moves_left(starting_moves)
 
@@ -39,6 +40,7 @@ func set_moves_left(_moves_left: int)-> void:
 	emit_signal("moves_left", moves_left)
 	if moves_left == 0:
 		emit_signal("out_of_moves")
+		_out_of_moves()
 	print("Moves left: ", moves_left)
 
 func get_moves_left()-> int:
@@ -50,6 +52,10 @@ func sub_moves(value: int)-> void:
 
 func has_enough_moves(cost: int)-> bool:
 	return (cost <= get_moves_left())
+
+func _out_of_moves()-> void:
+	pass
+
 
 # Movement costs
 func add_cost_key(cost_name: String)-> void:
