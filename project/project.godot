@@ -9,31 +9,55 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "LightArea",
 "class": "FlashLight",
 "language": "GDScript",
-"path": "res://cole/scenes/unit/player/Flashlight.gd"
+"path": "res://cole/scenes/lights/Flashlight.gd"
+}, {
+"base": "LightSource",
+"class": "LightArea",
+"language": "GDScript",
+"path": "res://cole/scenes/lights/light_area/LightArea.gd"
 }, {
 "base": "TileMap",
 "class": "LightController",
 "language": "GDScript",
-"path": "res://cole/scenes/LightController.gd"
+"path": "res://cole/scenes/LightTileController.gd"
+}, {
+"base": "Node2D",
+"class": "LightLogger",
+"language": "GDScript",
+"path": "res://cole/scenes/LightLogger.gd"
+}, {
+"base": "Node2D",
+"class": "LightSource",
+"language": "GDScript",
+"path": "res://cole/scenes/lights/light_area/light_source/LightSource.gd"
 }, {
 "base": "Light2D",
 "class": "LightTile",
 "language": "GDScript",
-"path": "res://cole/scenes/resources/LightTile.gd"
+"path": "res://cole/scenes/lights/light_area/light_source/light_tile/LightTile.gd"
 }, {
 "base": "Node2D",
 "class": "Unit",
 "language": "GDScript",
 "path": "res://cole/scenes/unit/Unit.gd"
+}, {
+"base": "Node2D",
+"class": "UnitLogger",
+"language": "GDScript",
+"path": "res://cole/scenes/UnitLogger.gd"
 } ]
 _global_script_class_icons={
 "FlashLight": "",
+"LightArea": "",
 "LightController": "",
+"LightLogger": "",
+"LightSource": "",
 "LightTile": "",
-"Unit": ""
+"Unit": "",
+"UnitLogger": ""
 }
 
 [application]
@@ -41,6 +65,10 @@ _global_script_class_icons={
 config/name="mini-game-many-game"
 run/main_scene="res://_core/ReadMe.tscn"
 config/icon="res://core/icon.png"
+
+[debug]
+
+settings/fps/force_fps=60
 
 [importer_defaults]
 

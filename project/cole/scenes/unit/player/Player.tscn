@@ -2,7 +2,7 @@
 
 [ext_resource path="res://cole/scenes/unit/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://cole/sprites/player.png" type="Texture" id=2]
-[ext_resource path="res://cole/scenes/unit/player/Flashlight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://cole/scenes/lights/Flashlight.tscn" type="PackedScene" id=3]
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
