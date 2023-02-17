@@ -2,8 +2,6 @@ extends Node2D
 class_name LightLogger
 
 
-# Hello World
-
 export(PackedScene) var packedCandle: PackedScene 
 
 #onready var lights: Array = []
