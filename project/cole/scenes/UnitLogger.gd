@@ -69,6 +69,33 @@ func is_unit_at_tile_pos(tile_pos: Vector2)-> bool:
 	return (get_unit_at_tile_pos(tile_pos) != null)
 
 
+func _get_dominant_light_mode(lights: Array)-> int:
+	var dom_mode: int = LightTile.LIGHT_MODE.OPAQUE
+	var max_mode: int = LightTile.LIGHT_MODE.TRANSPARENT
+	var new_mode: int = 0
+	#print( LightTile.LIGHT_MODE.TRANSPARENT)
+	for i in lights:
+		new_mode = i.get_light_mode()
+		print(new_mode)
+		if dom_mode < new_mode:
+			dom_mode = new_mode
+			if dom_mode == max_mode:
+				return max_mode
+	return dom_mode
+
+
+func _lights_at_tile_pos(lights: Array, tile_pos: Vector2)-> void:
+	var unit: Node2D = get_unit_at_tile_pos(tile_pos)
+	if unit:
+		#print(LightTile.LIGHT_MODE.TRANSPARENT)
+		var total_mode: int = _get_dominant_light_mode(lights)
+		#print(unit, " ", total_mode)
+		if total_mode == LightTile.LIGHT_MODE.TRANSPARENT:
+			print("Show")
+			unit.show_unit()
+		else:
+			unit.hide_unit()
+
 #var c = 0
 #func _process(delta: float) -> void:
 #	c += 1

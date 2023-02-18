@@ -34,6 +34,8 @@ func delete_light_at_pos(tile_pos: Vector2)-> void:
 	if light:
 		delete_light(light)
 
+func set_light_mode(light: LightTile, mode: int)-> void:
+	lightController.set_light_mode(light, mode)
 
 
 func _get_light_at_tile(tile_pos: Vector2)-> LightTile:

@@ -1,6 +1,8 @@
 extends Node2D
 class_name LightController
 
+signal lights_at_tile_pos(lights_array, tile_pos)
+
 onready var pooled_lights: Array = []
 
 export(PackedScene) var packedLightTile: PackedScene
@@ -46,10 +48,17 @@ func _delete_light(tile_pos: Vector2, light: LightTile)-> void:
 		_clean_position(tile_pos)
 
 
+func _emit_lights_at_tile_pos(tile_pos: Vector2)-> void:
+	var light_array: Array = []
+	if light_tiles.get(tile_pos.x, {}):
+		var d: Dictionary = light_tiles.get(tile_pos.x, {})
+		if !d.empty():
+			light_array = d.get(tile_pos.y, [])
+	emit_signal("lights_at_tile_pos", light_array, tile_pos)
+
 func create_light(tile_pos: Vector2)-> LightTile:
 	var light: LightTile = fetch_pooled_light()
 	_create_light(tile_pos, light)
-	
 	light.set_tile_position(tile_pos)
 	return light
 
@@ -58,6 +67,11 @@ func delete_light(light: LightTile)-> void:
 	_delete_light(tile_pos, light)
 	pooled_lights.append(light)
 	light.visible = false
+
+func set_light_mode(light: LightTile, light_mode: int)-> void:
+	light._set_light_mode(light_mode)
+	var tile_pos: Vector2 = light.get_tile_position()
+	_emit_lights_at_tile_pos(tile_pos)
 
 func fetch_pooled_light()-> LightTile:
 	var light: LightTile

@@ -25,13 +25,13 @@ func update_lights()-> void:
 		
 		for tile in inner_tiles:
 			var light: LightTile = create_light(tile)
-			light.set_light_mode(inner_mode)
 			light.set_light_color(inner_color)
+			set_light_mode(light, inner_mode)
 	
 	for tile in outer_tiles:
 		var light: LightTile = create_light(tile)
 		light.set_light_color(outer_color)
-		light.set_light_mode(outer_mode)
+		set_light_mode(light, outer_mode)
 
 var c: int = 0
 func _process(_delta: float) -> void:
