@@ -106,6 +106,19 @@ func get_tiles_cone(tile_pos: Vector2, cardinal_dir: Vector2, cone_length: int)-
 	return tiles
 
 
+# Returns 90 degree cone of tiles at (tile_pos) given (cardinal direction) of length (cone_length)
+func get_tiles_line_occluded(tile_pos: Vector2, cardinal_dir: Vector2, length: int)-> PoolVector2Array:
+	var tiles: PoolVector2Array = [tile_pos]
+	var next_tile: Vector2 = tile_pos
+	for i in length:
+		next_tile += cardinal_dir
+		if tileMapEffect.is_wall_tile(next_tile):
+			tiles.append(next_tile)
+			break
+		tiles.append(next_tile)
+	return tiles
+
+
 func _get_wall_tiles(tiles: PoolVector2Array)-> PoolVector2Array:
 	var walls: PoolVector2Array = []
 	for pos in tiles:

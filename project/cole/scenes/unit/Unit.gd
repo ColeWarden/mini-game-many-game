@@ -143,3 +143,9 @@ func get_unit_at_tile_pos(tile_pos: Vector2)-> Unit:
 
 func is_unit_at_tile_pos(tile_pos: Vector2)-> bool:
 	return unitLogger.is_unit_at_tile_pos(tile_pos)
+
+func hide_unit()-> void:
+	visible = false
+
+func show_unit()-> void:
+	visible = true

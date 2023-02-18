@@ -3,18 +3,24 @@ class_name LightTile
 
 export(Texture) var transparent_texture: Texture
 export(Texture) var semi_transparent_texture: Texture
-enum LIGHT_MODE {
-	TRANSPARENT,
-	SEMI_TRANSPARENT,
-}
-var light_mode: int = LIGHT_MODE.TRANSPARENT
 
-func set_light_mode(_mode: int)-> void:
+enum LIGHT_MODE {
+	OPAQUE = 0,
+	SEMI_TRANSPARENT = 1,
+	TRANSPARENT = 2,
+}
+
+var light_mode: int = LIGHT_MODE.OPAQUE
+
+func _set_light_mode(_mode: int)-> void:
 	light_mode = _mode
 	if (light_mode == LIGHT_MODE.TRANSPARENT):
 		set_texture(transparent_texture)
 	elif (light_mode == LIGHT_MODE.SEMI_TRANSPARENT):
 		set_texture(semi_transparent_texture)
+
+func get_light_mode()-> int:
+	return light_mode
 
 func set_light_color(_color: Color)-> void:
 	color = _color
