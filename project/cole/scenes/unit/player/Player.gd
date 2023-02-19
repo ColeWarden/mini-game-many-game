@@ -14,11 +14,12 @@ func cycle_flashlight_mode(cycle: bool)-> void:
 
 func _ready() -> void:
 	._ready()
+	
 	var _err = connect("move_to_tile", flashlight, "set_tile_position")
 	_err = connect("look_to_direction", flashlight, "set_look_direction")
 	_err = connect("moves_left", self, "_update_gui_moves")
 	flashlight.set_tile_size(3)
-	set_starting_moves(10)
+	set_starting_moves(100)
 
 func _out_of_moves()-> void:
 	_update_gui_waiting()

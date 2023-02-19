@@ -8,6 +8,7 @@ signal look_to_direction(direction)
 signal moves_left(moves_left)
 signal out_of_moves()
 
+onready var sprite: Sprite = $Sprite
 onready var unitLogger: UnitLogger = get_tree().get_nodes_in_group("unitLogger").front()
 onready var tileMapEffect: TileMapEffect = get_tree().get_nodes_in_group("tileMapEffect").front()
 
@@ -23,6 +24,7 @@ var costs: Dictionary = {
 }
 
 func _ready()-> void:
+	light_mask = 0
 	connect("out_of_moves", unitLogger, "next_turn_order")
 
 func play_turn()-> void:
@@ -56,6 +58,8 @@ func has_enough_moves(cost: int)-> bool:
 func _out_of_moves()-> void:
 	pass
 
+func set_texture(path: String)-> void:
+	sprite.set_texture(load(path))
 
 # Movement costs
 func add_cost_key(cost_name: String)-> void:

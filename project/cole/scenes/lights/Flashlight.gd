@@ -1,7 +1,7 @@
 extends LightArea
 class_name FlashLight
 
-var look_direction: Vector2 = Vector2.DOWN
+
 
 enum MODE {
 	CONE,
@@ -12,6 +12,9 @@ enum MODE {
 }
 
 var mode: int = MODE.CONE
+var look_direction: Vector2 = Vector2.DOWN
+export(Color) var transparent_color: Color = Color(0.734375, 0.332764, 0.332764)
+export(Color) var semi_transparent_color: Color = Color()
 
 func set_mode(_mode: int)-> void:
 	mode = _mode
@@ -45,12 +48,14 @@ func set_mode_cone()-> void:
 	for t_pos in surrounding_tiles:
 		lightTile = create_light(t_pos)
 		set_light_mode(lightTile, lightTile.LIGHT_MODE.TRANSPARENT)
+		set_light_color(lightTile, transparent_color)
 	
 	var edge_tiles: PoolVector2Array = get_tiles_cone(tile_position - look_direction, look_direction, tile_size + 1)
 	edge_tiles = get_culled_pool(edge_tiles, surrounding_tiles)
 	for t_pos in edge_tiles:
 		lightTile = create_light(t_pos)
 		set_light_mode(lightTile, lightTile.LIGHT_MODE.SEMI_TRANSPARENT)
+		set_light_color(lightTile, semi_transparent_color)
 	
 	# Behind Light
 	var perpendicular_vec: Vector2 = get_perpendicular_cardinal_dir(look_direction)
@@ -59,6 +64,7 @@ func set_mode_cone()-> void:
 	for t_pos in surrounding_tiles:
 		lightTile = create_light(t_pos)
 		set_light_mode(lightTile, lightTile.LIGHT_MODE.SEMI_TRANSPARENT)
+		set_light_color(lightTile, semi_transparent_color)
 
 func set_mode_beam()-> void:
 	var beam_length: int = tile_size
@@ -88,6 +94,7 @@ func set_mode_beam()-> void:
 	for t_pos in surrounding_tiles:
 		lightTile = create_light(t_pos)
 		set_light_mode(lightTile, lightTile.LIGHT_MODE.TRANSPARENT)
+		set_light_color(lightTile, transparent_color)
 	
 	# Behind Light
 	var perpendicular_vec: Vector2 = get_perpendicular_cardinal_dir(look_direction)
@@ -96,6 +103,7 @@ func set_mode_beam()-> void:
 	for t_pos in surrounding_tiles:
 		lightTile = create_light(t_pos)
 		set_light_mode(lightTile, lightTile.LIGHT_MODE.SEMI_TRANSPARENT)
+		set_light_color(lightTile, semi_transparent_color)
 
 func set_mode_area()-> void:
 	var cir_size: int = tile_size
@@ -107,10 +115,19 @@ func set_mode_area()-> void:
 	for t_pos in semi_tiles:
 		lightTile = create_light(t_pos)
 		set_light_mode(lightTile, lightTile.LIGHT_MODE.SEMI_TRANSPARENT)
+		set_light_color(lightTile, semi_transparent_color)
 	for t_pos in inner_tiles:
 		lightTile = create_light(t_pos)
 		set_light_mode(lightTile, lightTile.LIGHT_MODE.TRANSPARENT)
+		set_light_color(lightTile, transparent_color)
 
 func set_mode_off()-> void:
-	pass
-
+	var surrounding_tiles: PoolVector2Array = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+	var lightTile: LightTile
+	for pos in surrounding_tiles:
+		lightTile = create_light(tile_position + pos)
+		set_light_mode(lightTile, lightTile.LIGHT_MODE.SEMI_TRANSPARENT)
+		set_light_color(lightTile, semi_transparent_color)
+	lightTile = create_light(tile_position)
+	set_light_mode(lightTile, lightTile.LIGHT_MODE.TRANSPARENT)
+	set_light_color(lightTile, transparent_color)

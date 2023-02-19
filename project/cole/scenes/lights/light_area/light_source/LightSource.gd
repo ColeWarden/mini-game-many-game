@@ -37,6 +37,8 @@ func delete_light_at_pos(tile_pos: Vector2)-> void:
 func set_light_mode(light: LightTile, mode: int)-> void:
 	lightController.set_light_mode(light, mode)
 
+func set_light_color(lightTile: LightTile, color: Color)-> void:
+	lightTile.set_light_color(color)
 
 func _get_light_at_tile(tile_pos: Vector2)-> LightTile:
 	for light in lights:

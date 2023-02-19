@@ -4,7 +4,6 @@ class_name LightArea
 
 onready var tileMapEffect: TileMapEffect = get_tree().get_nodes_in_group("tileMapEffect").front()
 
-var tile_blocked: bool = true
 var tile_size: int = 1 setget set_tile_size
 
 
@@ -144,3 +143,5 @@ func get_culled_pool(source_pool: PoolVector2Array, cull_pool: PoolVector2Array)
 			remaining_pool.append(vec2)
 		found = false
 	return remaining_pool
+
+

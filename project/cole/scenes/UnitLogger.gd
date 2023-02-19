@@ -3,6 +3,7 @@ class_name UnitLogger
 
 export(PackedScene) var packedPlayer: PackedScene 
 export(PackedScene) var packedDummy: PackedScene 
+
 onready var turn: int = 0
 onready var turn_order: int = -1
 onready var units: Array = []
@@ -15,8 +16,11 @@ func _ready() -> void:
 	load_units()
 
 func load_units()-> void:
-	var _unit = create_unit_at_pos("player", Vector2(5,5))
+	var _unit = create_unit_at_pos("player", Vector2(19,5))
 	_unit = create_unit_at_pos("dummy", Vector2(6,5))
+	_unit = create_unit_at_pos("dummy", Vector2(20,8))
+	_unit.set_texture("res://cole/sprites/unit/tree.png")
+	_unit.modulate = Color.white
 	next_turn_order()
 
 func next_turn_order()-> void:
@@ -76,7 +80,7 @@ func _get_dominant_light_mode(lights: Array)-> int:
 	#print( LightTile.LIGHT_MODE.TRANSPARENT)
 	for i in lights:
 		new_mode = i.get_light_mode()
-		print(new_mode)
+		#print(new_mode)
 		if dom_mode < new_mode:
 			dom_mode = new_mode
 			if dom_mode == max_mode:
@@ -91,7 +95,7 @@ func _lights_at_tile_pos(lights: Array, tile_pos: Vector2)-> void:
 		var total_mode: int = _get_dominant_light_mode(lights)
 		#print(unit, " ", total_mode)
 		if total_mode == LightTile.LIGHT_MODE.TRANSPARENT:
-			print("Show")
+			#print("Show")
 			unit.show_unit()
 		else:
 			unit.hide_unit()

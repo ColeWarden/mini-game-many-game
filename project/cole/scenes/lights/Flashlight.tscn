@@ -4,3 +4,5 @@
 
 [node name="Flashlight" type="Node2D"]
 script = ExtResource( 1 )
+transparent_color = Color( 1, 1, 1, 1 )
+semi_transparent_color = Color( 1.7, 0, 1.4, 1 )
